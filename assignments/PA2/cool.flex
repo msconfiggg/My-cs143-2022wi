@@ -210,12 +210,12 @@ f{a}{l}{s}{e}               { cool_yylval.boolean = false; return (BOOL_CONST); 
                           *string_buf_ptr++ = '\n';
                       }
                     }
-<STRING>\n          {                                                         /* "\n" -> '\n'(nextline, illegal) */
-                      curr_lineno++;
-                      BEGIN(INITIAL);
-                      cool_yylval.error_msg = "Unterminated string constant";
-                      return (ERROR);
-                    }
+<STRING>\n {                                                         /* "\n" -> '\n'(nextline, illegal) */
+  curr_lineno++;
+  BEGIN(INITIAL);
+  cool_yylval.error_msg = "Unterminated string constant";
+  return (ERROR);
+}
 <STRING>.           { 
                       if (yytext[0] == '\0') {
                         string_has_null = true;
